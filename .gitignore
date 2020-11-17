@@ -4,6 +4,7 @@
 !composer.json
 *.lock
 /deps/
+/bak/
 /build/dist/
 /build/vendor/
 /tests/

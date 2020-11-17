@@ -4,7 +4,7 @@
     "templates": "/build/templates",
     "sources":{
         "css": "/src/css",
-        "js": "/src/js",
+        "js": "/src",
         "img": "/src/img"
     },
     "deploy": {
