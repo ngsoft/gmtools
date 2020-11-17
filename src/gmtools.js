@@ -47,9 +47,47 @@
             GMinfo = (typeof GM_info !== 'undefined' ? GM_info : (typeof GM === 'object' && GM !== null && typeof GM.info === 'object' ? GM.info : null)),
             scriptname = GMinfo ? `${GMinfo.script.name} @${GMinfo.script.version}` : "",
             UUID = GMinfo ? GMinfo.script.uuid : "",
-            doc = global.document;
+            doc = global.document,
+            reqjs = {
+                //Requirejs CDN
+                src: 'https://cdn.jsdelivr.net/gh/requirejs/requirejs@latest/require.min.js',
+                key: 'require.min.js'
+            }, sourceUrlRegExp = /\/\/@\s+sourceURL=/,
+            sourceMappingUrlRegExp = /(\/\/#\s+sourceMappingURL=[^\n\r]*)/g;
 
 
+    //add sourceURL and sourceMappingURL
+    function transform(content, url){
+        url = url instanceof URL ? url : new URL(url);
+        let sourceMappingUrl = content.match(sourceMappingUrlRegExp);
+        if (sourceMappingUrl) {
+            content = content.replace(sourceMappingUrlRegExp, '');
+            let
+                    smurl = '//# sourceMappingURL=',
+                    newSource = sourceMappingUrl[0],
+                    matches = newSource.match(/=(.*)$/);
+            if (matches !== null) {
+                let file = matches[1];
+                if (file.indexOf('//') === 0) {
+                    file = url.protocol + file;
+                } else if (file.indexOf('/') === 0) {
+                    file = url.origin + file;
+                } else if (!(/^https?:\/\//.test(file))) {
+                    file = url.origin + url.pathname.substr(0, url.pathname.lastIndexOf('/') + 1) + file;
+                }
+                smurl += file;
+                content += '\n' + smurl;
+            }
+
+        }
+        if (!sourceUrlRegExp.test(content)) {
+            sourceUrl = url.href;
+            content += "\r\n//# sourceURL=" + sourceUrl;
+        }
+
+
+        return content;
+    }
 
     function addscript(src){
         if (typeof src === s && src.length > 0) {
@@ -563,25 +601,135 @@
 
     root = paths.modules;
 
+    const config = new Configuration();
+    config.set({
+        root, dev, paths,
+        cache: {
+            enabled: usecache,
+            ttl: 30 * minute,
+            prefix: 'GMCache:'
+        }
+
+    });
+
+    const cache = new Cache();
+    if(cache.supported){
+        if (sessionStorage.getItem('newsession') !== null) {
+            config.set('newsession', true);
+            sessionStorage.removeItem('newsession');
+        }
+    }
 
 
 
-    console.debug(root);
+    /**
+     * requirejs Loader
+     */
+
+
+    let hit = false;
+
+    if (cache.enabled) {
+        let script = cache.loadItem(reqjs.key);
+        if (typeof script === s && script.length > 0) {
+            cache.exec(script);
+            hit = true;
+        }
+
+    }
+    if (hit === false) {
+
+        (new Request(reqjs.src, false, false)) // async=false to get the variable available inside the script
+                .success(response => {
+                    let script = response.text;
+                    if (typeof script === s && script.length > 0) {
+                        script = transform(script, reqjs.src);
+                        if (cache.enabled) cache.saveItem(reqjs.key, script);
+                        cache.exec(script);
+                    }
+
+                })
+                .error(response => {
+                    throw new Error('Cannot fetch ' + reqjs.key + ' ' + response.error.message);
+                });
+    }
+
+    if (typeof requirejs !== f) throw new Error('Cannot execute ' + reqjs.key);
 
 
 
+    requirejs.config({
+        baseUrl: root,
+        waitSeconds: 30
+    });
 
 
+    // adding some deps
+    config
+            .addPath('Plyr', 'https://cdn.jsdelivr.net/npm/plyr@%s/dist/plyr', '3.6.2')
+            .addPath('Subtitle', 'https://cdn.jsdelivr.net/npm/subtitle@%s/dist/subtitle.bundle.min', '2.0.5')
+            .addPath('Hls', 'https://cdn.jsdelivr.net/npm/hls.js@%s/dist/hls.min', '0.14.16', {
+                enableWebVTT: false, enableCEA708Captions: false
+            })
+            .addSource('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min.js');
 
 
+    //exporting this script contents
+    const define = global.define;
+
+    define('GM', gmexports);
+    define('config', config);
+    define('Request', function(){
+        return Request;
+    });
+    define('cache', cache);
+
+    // overriding RequireJS default loader to enable cache and XHR
+    if (cache.supported) {
 
 
+        const load = requirejs.load;
 
+        //Code fast load using localStorage Cache set @usecache in userscript header
+        requirejs.load = function(context, moduleName, url){
 
+            let  hit = false;
+            url = new URL(url);
+            if (cache.enabled) {
+                url.searchParams.set('tt', +new Date()); // get a fresh version
+                let contents = cache.loadItem(moduleName);
+                if (typeof contents === s && contents.length > 0) {
+                    executeGMCode(contents);
+                    context.completeLoad(moduleName);
+                    hit = true;
+                }
+            }
+            if (hit === false) {
 
+                (new Request(url.href, false, false)) // also async=false to get the scripts loaded in the right order (loaded only once by session if cache is enabled)
+                        .fetch()
+                        .then(response => {
+                            let script = response.text;
+                            if (typeof script === s && script.length > 0) {
+                                script = transform(script, url);
+                                if (cache.enabled) cache.saveItem(moduleName, script);
+                                executeGMCode(script);
+                                context.completeLoad(moduleName);
+                                return;
+                            }
+                            throw new Error('Fetch Failed');
 
-
-
+                        })
+                        .catch(response => {
+                            let message = ['Cannot fetch', moduleName, 'module using xhr, fallback to regular method.'];
+                            if (response instanceof Error) message.push(response.message);
+                            console.warn(...message);
+                            // console.warn(response);
+                            load(context, moduleName, url.href);
+                        });
+            }
+        };
+    }
 
 
 }(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window));
