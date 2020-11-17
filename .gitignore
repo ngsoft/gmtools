@@ -1,5 +1,6 @@
 .*
 !.gitignore
+!.ht*
 !composer.json
 *.lock
 /deps/
