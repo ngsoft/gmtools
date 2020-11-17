@@ -1,0 +1,17 @@
+{
+
+    "destination": "/build/dist",
+    "templates": "/build/templates",
+    "sources":{
+        "css": "/src/css",
+        "js": "/src/js",
+        "img": "/src/img"
+    },
+    "deploy": {
+        "css": "/dist/css",
+        "js": "/dist",
+        "img": "/dist/img"
+    }
+
+
+}

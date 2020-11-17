@@ -1,0 +1,16 @@
+{
+    "name": "ngsoft/userscripts",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aymeric Anger",
+            "email": "daedelus.git@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "ngsoft/curl": "^1.2",
+        "ngsoft/tools": "^1.4"
+    }
+}

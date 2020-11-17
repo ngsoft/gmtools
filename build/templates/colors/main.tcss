@@ -1,0 +1,9 @@
+.pure .$class{
+    color: $color !important;
+}
+.pure .bg-$class{
+    background-color: $color !important;
+}
+.pure .border-$class{
+    border-color: $color !important;
+}

@@ -1,0 +1,10 @@
+{
+    "name": "lightcolors",
+    "includes": [
+        "light",
+        "color"
+    ],
+    "classname": ".pure %s.light",
+    "style": "variants.tcss",
+    "pos": 1
+}

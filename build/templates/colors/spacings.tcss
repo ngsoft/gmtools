@@ -1,0 +1,42 @@
+/* Margins size: $class */
+.pure .m-$class,
+.pure .my-$class,
+.pure .mt-$class {
+    margin-top: $spacing !important;
+}
+.pure .m-$class,
+.pure .my-$class,
+.pure .mb-$class {
+    margin-bottom: $spacing !important;
+}
+.pure .m-$class,
+.pure .mx-$class,
+.pure .ml-$class {
+    margin-left: $spacing !important;
+}
+.pure .m-$class,
+.pure .mx-$class,
+.pure .mr-$class {
+    margin-right: $spacing !important;
+}
+/* Paddings size: $class */
+.pure .p-$class,
+.pure .py-$class,
+.pure .pt-$class {
+    padding-top: $spacing !important;
+}
+.pure .p-$class,
+.pure .py-$class,
+.pure .pb-$class {
+    padding-bottom: $spacing !important;
+}
+.pure .p-$class,
+.pure .px-$class,
+.pure .pl-$class {
+    padding-left: $spacing !important;
+}
+.pure .p-$class,
+.pure .px-$class,
+.pure .pr-$class {
+    padding-right: $spacing !important;
+}

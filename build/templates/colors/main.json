@@ -1,0 +1,10 @@
+{
+    "name": "maincolors",
+    "includes": [
+        "color"
+    ],
+    "classname": ".pure .%s",
+    "style": "main.tcss",
+    "pos": 0
+
+}

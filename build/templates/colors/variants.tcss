@@ -1,0 +1,30 @@
+.pure .$class.light{
+    color: $light !important;
+}
+.pure .bg-$class-light{
+    background-color: $light !important;
+}
+.pure .border-$class-light{
+    border-color: $light !important;
+}
+.pure .gm-btn.$class{
+    background-color: $color !important;
+    border-color: $color !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.$class.light{
+    background-color: $light !important;
+    color: $color !important;
+}
+
+.pure .message.$class{
+    background-color: $light;
+    -webkit-box-shadow: 0px 0px 0px 1px $light inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px $light inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.$class.light {
+    background-color: $color;
+    -webkit-box-shadow: 0px 0px 0px 1px $color inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px $color inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
