@@ -5,7 +5,7 @@
 *.lock
 /deps/
 /build/
+/tests/
 /nbproject/*/
 *.dev.*
 *.dev
-

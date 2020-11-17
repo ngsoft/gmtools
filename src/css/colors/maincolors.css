@@ -1,0 +1,198 @@
+.pure .black{
+    color: var(--black) !important;
+}
+.pure .bg-black{
+    background-color: var(--black) !important;
+}
+.pure .border-black{
+    border-color: var(--black) !important;
+}
+.pure .dark{
+    color: var(--dark) !important;
+}
+.pure .bg-dark{
+    background-color: var(--dark) !important;
+}
+.pure .border-dark{
+    border-color: var(--dark) !important;
+}
+.pure .gray{
+    color: var(--gray) !important;
+}
+.pure .bg-gray{
+    background-color: var(--gray) !important;
+}
+.pure .border-gray{
+    border-color: var(--gray) !important;
+}
+.pure .white{
+    color: var(--white) !important;
+}
+.pure .bg-white{
+    background-color: var(--white) !important;
+}
+.pure .border-white{
+    border-color: var(--white) !important;
+}
+.pure .light{
+    color: var(--light) !important;
+}
+.pure .bg-light{
+    background-color: var(--light) !important;
+}
+.pure .border-light{
+    border-color: var(--light) !important;
+}
+.pure .lighter{
+    color: var(--lighter) !important;
+}
+.pure .bg-lighter{
+    background-color: var(--lighter) !important;
+}
+.pure .border-lighter{
+    border-color: var(--lighter) !important;
+}
+.pure .red{
+    color: var(--red) !important;
+}
+.pure .bg-red{
+    background-color: var(--red) !important;
+}
+.pure .border-red{
+    border-color: var(--red) !important;
+}
+.pure .pink{
+    color: var(--pink) !important;
+}
+.pure .bg-pink{
+    background-color: var(--pink) !important;
+}
+.pure .border-pink{
+    border-color: var(--pink) !important;
+}
+.pure .orange{
+    color: var(--orange) !important;
+}
+.pure .bg-orange{
+    background-color: var(--orange) !important;
+}
+.pure .border-orange{
+    border-color: var(--orange) !important;
+}
+.pure .yellow{
+    color: var(--yellow) !important;
+}
+.pure .bg-yellow{
+    background-color: var(--yellow) !important;
+}
+.pure .border-yellow{
+    border-color: var(--yellow) !important;
+}
+.pure .purple{
+    color: var(--purple) !important;
+}
+.pure .bg-purple{
+    background-color: var(--purple) !important;
+}
+.pure .border-purple{
+    border-color: var(--purple) !important;
+}
+.pure .green{
+    color: var(--green) !important;
+}
+.pure .bg-green{
+    background-color: var(--green) !important;
+}
+.pure .border-green{
+    border-color: var(--green) !important;
+}
+.pure .blue{
+    color: var(--blue) !important;
+}
+.pure .bg-blue{
+    background-color: var(--blue) !important;
+}
+.pure .border-blue{
+    border-color: var(--blue) !important;
+}
+.pure .cyan{
+    color: var(--cyan) !important;
+}
+.pure .bg-cyan{
+    background-color: var(--cyan) !important;
+}
+.pure .border-cyan{
+    border-color: var(--cyan) !important;
+}
+.pure .brown{
+    color: var(--brown) !important;
+}
+.pure .bg-brown{
+    background-color: var(--brown) !important;
+}
+.pure .border-brown{
+    border-color: var(--brown) !important;
+}
+.pure .primary{
+    color: var(--primary) !important;
+}
+.pure .bg-primary{
+    background-color: var(--primary) !important;
+}
+.pure .border-primary{
+    border-color: var(--primary) !important;
+}
+.pure .secondary{
+    color: var(--secondary) !important;
+}
+.pure .bg-secondary{
+    background-color: var(--secondary) !important;
+}
+.pure .border-secondary{
+    border-color: var(--secondary) !important;
+}
+.pure .success{
+    color: var(--success) !important;
+}
+.pure .bg-success{
+    background-color: var(--success) !important;
+}
+.pure .border-success{
+    border-color: var(--success) !important;
+}
+.pure .info{
+    color: var(--info) !important;
+}
+.pure .bg-info{
+    background-color: var(--info) !important;
+}
+.pure .border-info{
+    border-color: var(--info) !important;
+}
+.pure .warning{
+    color: var(--warning) !important;
+}
+.pure .bg-warning{
+    background-color: var(--warning) !important;
+}
+.pure .border-warning{
+    border-color: var(--warning) !important;
+}
+.pure .danger{
+    color: var(--danger) !important;
+}
+.pure .bg-danger{
+    background-color: var(--danger) !important;
+}
+.pure .border-danger{
+    border-color: var(--danger) !important;
+}
+.pure .spacing{
+    color: var(--spacing-6) !important;
+}
+.pure .bg-spacing{
+    background-color: var(--spacing-6) !important;
+}
+.pure .border-spacing{
+    border-color: var(--spacing-6) !important;
+}

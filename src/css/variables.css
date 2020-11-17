@@ -1,0 +1,70 @@
+/**
+ * Colors
+ */
+.pure {
+
+    --black: #0a0a0a;
+    --dark: #363636;
+
+    --gray-darker: #4a4a4a;
+    --gray-dark: #696969;
+    --gray: #708090;
+    --gray-light: #d3d3d3;
+    --gray-lighter: #f5f5f5;
+
+    --white: #ffffff;
+    --light: #f8f8f8;
+    --lighter: #fafafa;
+
+    --red: #dc143c;
+    --pink: #ee82ee;
+    --orange: #ff8c00;
+    --yellow: #ffd700;
+    --purple: #9370db;
+    --green: #48c774;
+    --blue: #3273dc;
+    --cyan: #209cee;
+    --brown: #cd863f;
+
+    --red-light: #ffe4e1;
+    --pink-light: #fff0f5;
+    --orange-light: #faebd7;
+    --yellow-light: #fffff0;
+    --purple-light: #f6e7ff;
+    --green-light: #f0fff0;
+    --blue-light: #f0f8ff;
+    --cyan-light: #f5fffa;
+    --brown-light: #fdf5e6;
+}
+
+/**
+ * Aliases
+ */
+.pure {
+    --primary: #3273dc;
+    --secondary: #708090;
+    --success: #48c774;
+    --info: #209cee;
+    --warning: #ff8c00;
+    --danger: #dc143c;
+
+    --primary-light: #f0f8ff;
+    --secondary-light: #d3d3d3;
+    --success-light: #f0fff0;
+    --info-light: #f5fffa;
+    --warning-light: #faebd7;
+    --danger-light: #ffe4e1;
+}
+
+/**
+ * Spacing
+ */
+.pure {
+    --spacing-0: 0;
+    --spacing-1: 0.25em;
+    --spacing-2: 0.5em;
+    --spacing-3: 0.75em;
+    --spacing-4: 1em;
+    --spacing-5: 1.5em;
+    --spacing-6: 3em;
+}

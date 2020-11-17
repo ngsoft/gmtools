@@ -1,0 +1,450 @@
+.pure .red.light{
+    color: var(--red-light) !important;
+}
+.pure .bg-red-light{
+    background-color: var(--red-light) !important;
+}
+.pure .border-red-light{
+    border-color: var(--red-light) !important;
+}
+.pure .gm-btn.red{
+    background-color: var(--red) !important;
+    border-color: var(--red) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.red.light{
+    background-color: var(--red-light) !important;
+    color: var(--red) !important;
+}
+
+.pure .message.red{
+    background-color: var(--red-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--red-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--red-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.red.light {
+    background-color: var(--red);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--red) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--red) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .pink.light{
+    color: var(--pink-light) !important;
+}
+.pure .bg-pink-light{
+    background-color: var(--pink-light) !important;
+}
+.pure .border-pink-light{
+    border-color: var(--pink-light) !important;
+}
+.pure .gm-btn.pink{
+    background-color: var(--pink) !important;
+    border-color: var(--pink) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.pink.light{
+    background-color: var(--pink-light) !important;
+    color: var(--pink) !important;
+}
+
+.pure .message.pink{
+    background-color: var(--pink-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--pink-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--pink-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.pink.light {
+    background-color: var(--pink);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--pink) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--pink) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .orange.light{
+    color: var(--orange-light) !important;
+}
+.pure .bg-orange-light{
+    background-color: var(--orange-light) !important;
+}
+.pure .border-orange-light{
+    border-color: var(--orange-light) !important;
+}
+.pure .gm-btn.orange{
+    background-color: var(--orange) !important;
+    border-color: var(--orange) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.orange.light{
+    background-color: var(--orange-light) !important;
+    color: var(--orange) !important;
+}
+
+.pure .message.orange{
+    background-color: var(--orange-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--orange-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--orange-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.orange.light {
+    background-color: var(--orange);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--orange) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--orange) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .yellow.light{
+    color: var(--yellow-light) !important;
+}
+.pure .bg-yellow-light{
+    background-color: var(--yellow-light) !important;
+}
+.pure .border-yellow-light{
+    border-color: var(--yellow-light) !important;
+}
+.pure .gm-btn.yellow{
+    background-color: var(--yellow) !important;
+    border-color: var(--yellow) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.yellow.light{
+    background-color: var(--yellow-light) !important;
+    color: var(--yellow) !important;
+}
+
+.pure .message.yellow{
+    background-color: var(--yellow-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--yellow-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--yellow-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.yellow.light {
+    background-color: var(--yellow);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--yellow) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--yellow) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .purple.light{
+    color: var(--purple-light) !important;
+}
+.pure .bg-purple-light{
+    background-color: var(--purple-light) !important;
+}
+.pure .border-purple-light{
+    border-color: var(--purple-light) !important;
+}
+.pure .gm-btn.purple{
+    background-color: var(--purple) !important;
+    border-color: var(--purple) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.purple.light{
+    background-color: var(--purple-light) !important;
+    color: var(--purple) !important;
+}
+
+.pure .message.purple{
+    background-color: var(--purple-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--purple-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--purple-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.purple.light {
+    background-color: var(--purple);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--purple) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--purple) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .green.light{
+    color: var(--green-light) !important;
+}
+.pure .bg-green-light{
+    background-color: var(--green-light) !important;
+}
+.pure .border-green-light{
+    border-color: var(--green-light) !important;
+}
+.pure .gm-btn.green{
+    background-color: var(--green) !important;
+    border-color: var(--green) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.green.light{
+    background-color: var(--green-light) !important;
+    color: var(--green) !important;
+}
+
+.pure .message.green{
+    background-color: var(--green-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--green-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--green-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.green.light {
+    background-color: var(--green);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--green) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--green) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .blue.light{
+    color: var(--blue-light) !important;
+}
+.pure .bg-blue-light{
+    background-color: var(--blue-light) !important;
+}
+.pure .border-blue-light{
+    border-color: var(--blue-light) !important;
+}
+.pure .gm-btn.blue{
+    background-color: var(--blue) !important;
+    border-color: var(--blue) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.blue.light{
+    background-color: var(--blue-light) !important;
+    color: var(--blue) !important;
+}
+
+.pure .message.blue{
+    background-color: var(--blue-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--blue-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--blue-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.blue.light {
+    background-color: var(--blue);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--blue) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--blue) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .cyan.light{
+    color: var(--cyan-light) !important;
+}
+.pure .bg-cyan-light{
+    background-color: var(--cyan-light) !important;
+}
+.pure .border-cyan-light{
+    border-color: var(--cyan-light) !important;
+}
+.pure .gm-btn.cyan{
+    background-color: var(--cyan) !important;
+    border-color: var(--cyan) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.cyan.light{
+    background-color: var(--cyan-light) !important;
+    color: var(--cyan) !important;
+}
+
+.pure .message.cyan{
+    background-color: var(--cyan-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--cyan-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--cyan-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.cyan.light {
+    background-color: var(--cyan);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--cyan) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--cyan) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .brown.light{
+    color: var(--brown-light) !important;
+}
+.pure .bg-brown-light{
+    background-color: var(--brown-light) !important;
+}
+.pure .border-brown-light{
+    border-color: var(--brown-light) !important;
+}
+.pure .gm-btn.brown{
+    background-color: var(--brown) !important;
+    border-color: var(--brown) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.brown.light{
+    background-color: var(--brown-light) !important;
+    color: var(--brown) !important;
+}
+
+.pure .message.brown{
+    background-color: var(--brown-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--brown-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--brown-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.brown.light {
+    background-color: var(--brown);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--brown) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--brown) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .primary.light{
+    color: var(--primary-light) !important;
+}
+.pure .bg-primary-light{
+    background-color: var(--primary-light) !important;
+}
+.pure .border-primary-light{
+    border-color: var(--primary-light) !important;
+}
+.pure .gm-btn.primary{
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.primary.light{
+    background-color: var(--primary-light) !important;
+    color: var(--primary) !important;
+}
+
+.pure .message.primary{
+    background-color: var(--primary-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--primary-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--primary-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.primary.light {
+    background-color: var(--primary);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--primary) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--primary) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .secondary.light{
+    color: var(--secondary-light) !important;
+}
+.pure .bg-secondary-light{
+    background-color: var(--secondary-light) !important;
+}
+.pure .border-secondary-light{
+    border-color: var(--secondary-light) !important;
+}
+.pure .gm-btn.secondary{
+    background-color: var(--secondary) !important;
+    border-color: var(--secondary) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.secondary.light{
+    background-color: var(--secondary-light) !important;
+    color: var(--secondary) !important;
+}
+
+.pure .message.secondary{
+    background-color: var(--secondary-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--secondary-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--secondary-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.secondary.light {
+    background-color: var(--secondary);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--secondary) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--secondary) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .success.light{
+    color: var(--success-light) !important;
+}
+.pure .bg-success-light{
+    background-color: var(--success-light) !important;
+}
+.pure .border-success-light{
+    border-color: var(--success-light) !important;
+}
+.pure .gm-btn.success{
+    background-color: var(--success) !important;
+    border-color: var(--success) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.success.light{
+    background-color: var(--success-light) !important;
+    color: var(--success) !important;
+}
+
+.pure .message.success{
+    background-color: var(--success-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--success-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--success-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.success.light {
+    background-color: var(--success);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--success) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--success) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .info.light{
+    color: var(--info-light) !important;
+}
+.pure .bg-info-light{
+    background-color: var(--info-light) !important;
+}
+.pure .border-info-light{
+    border-color: var(--info-light) !important;
+}
+.pure .gm-btn.info{
+    background-color: var(--info) !important;
+    border-color: var(--info) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.info.light{
+    background-color: var(--info-light) !important;
+    color: var(--info) !important;
+}
+
+.pure .message.info{
+    background-color: var(--info-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--info-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--info-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.info.light {
+    background-color: var(--info);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--info) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--info) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .warning.light{
+    color: var(--warning-light) !important;
+}
+.pure .bg-warning-light{
+    background-color: var(--warning-light) !important;
+}
+.pure .border-warning-light{
+    border-color: var(--warning-light) !important;
+}
+.pure .gm-btn.warning{
+    background-color: var(--warning) !important;
+    border-color: var(--warning) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.warning.light{
+    background-color: var(--warning-light) !important;
+    color: var(--warning) !important;
+}
+
+.pure .message.warning{
+    background-color: var(--warning-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--warning-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--warning-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.warning.light {
+    background-color: var(--warning);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--warning) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--warning) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.pure .danger.light{
+    color: var(--danger-light) !important;
+}
+.pure .bg-danger-light{
+    background-color: var(--danger-light) !important;
+}
+.pure .border-danger-light{
+    border-color: var(--danger-light) !important;
+}
+.pure .gm-btn.danger{
+    background-color: var(--danger) !important;
+    border-color: var(--danger) !important;
+    color: var(--white) !important;
+}
+.pure .gm-btn.danger.light{
+    background-color: var(--danger-light) !important;
+    color: var(--danger) !important;
+}
+
+.pure .message.danger{
+    background-color: var(--danger-light);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--danger-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--danger-light) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.pure .message.danger.light {
+    background-color: var(--danger);
+    -webkit-box-shadow: 0px 0px 0px 1px var(--danger) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 0px 1px var(--danger) inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}

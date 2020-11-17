@@ -1,0 +1,63 @@
+/**
+ * Lists
+ */
+
+.gm-list {
+    list-style-type: none;
+    box-sizing: border-box;
+    border-radius: 0;
+    padding: 0;
+    margin: .5em 0;
+    display: block;
+    font-size: 1em;
+    border: 1px solid rgba(0, 0, 0, .2);
+
+}
+
+.gm-list.round {
+    border-radius: .25em;
+}
+
+.gm-list>*,
+.gm-list>li {
+    text-align: center;
+    border: none;
+    padding: 1em;
+    position: relative;
+    font-weight: 600;
+    display: block;
+    white-space: nowrap;
+    line-height: 1em;
+}
+
+.gm-list>*:hover,
+.gm-list>li:hover {
+    background: var(--gray-lighter);
+    color: var(--dark);
+}
+
+
+.gm-list>*+*,
+.gm-list>li+li {
+    border-top: 1px solid rgba(0, 0, 0, .2);
+}
+
+.gm-list .gm-btn {
+    transform: translateY(-70%);
+    float: right;
+}
+
+.gm-list .gm-btn+.gm-btn {
+    margin-right: .5em;
+}
+
+.gm-list .checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+.gm-list:empty,
+.gm-list>*:empty {
+    display: none !important;
+}
