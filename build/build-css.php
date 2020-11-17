@@ -50,7 +50,5 @@ if ($css = parseFile($inputFile)) {
     if (!is_dir(dirname($output))) mkdir(dirname($output), 0777, true);
     file_put_contents($output, $css);
     print "Build complete.\n";
-
-    print_r($css);
 }
 
