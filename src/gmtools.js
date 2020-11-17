@@ -23,7 +23,7 @@
 
 (function(global){
 
-    /* globals define, require, module, self, requirejs, unsafeWindow, GM_info, GM */
+    /* globals self, requirejs, unsafeWindow, GM_info, GM */
 
     if (!GM_info) throw new Error('Not loaded in userscript.');
 
@@ -32,22 +32,15 @@
             s = "string",
             b = "boolean",
             f = "function",
-            o = "object",
             u = "undefined",
             n = "number",
             //time
             second = 1000,
             minute = 60 * second,
-            hour = minute * 60,
-            day = hour * 24,
-            week = day * 7,
-            year = 365 * day,
-            month = Math.round(year / 12),
             //exports
             GMinfo = (typeof GM_info !== 'undefined' ? GM_info : (typeof GM === 'object' && GM !== null && typeof GM.info === 'object' ? GM.info : null)),
             scriptname = GMinfo ? `${GMinfo.script.name} @${GMinfo.script.version}` : "",
             UUID = GMinfo ? GMinfo.script.uuid : "",
-            doc = global.document,
             reqjs = {
                 //Requirejs CDN
                 src: 'https://cdn.jsdelivr.net/gh/requirejs/requirejs@latest/require.min.js',
@@ -59,7 +52,7 @@
     //add sourceURL and sourceMappingURL
     function transform(content, url){
         url = url instanceof URL ? url : new URL(url);
-        let sourceMappingUrl = content.match(sourceMappingUrlRegExp);
+        let sourceMappingUrl = content.match(sourceMappingUrlRegExp), sourceUrl;
         if (sourceMappingUrl) {
             content = content.replace(sourceMappingUrlRegExp, '');
             let
@@ -87,16 +80,6 @@
 
 
         return content;
-    }
-
-    function addscript(src){
-        if (typeof src === s && src.length > 0) {
-            let s = doc.createElement("script");
-            s.setAttribute("type", "text/javascript");
-            s.appendChild(doc.createTextNode(src));
-            doc.head.appendChild(s);
-            return s;
-        }
     }
 
     function isPlainObject(v){
@@ -469,12 +452,12 @@
                     listener = this.listener;
 
             ['success', 'error', 'complete'].forEach(type => {
-                this.listener.addEventListener(type, e => {
+                listener.addEventListener(type, e => {
                     this.config[e.type].forEach(fn => fn(this.response));
                     if (e.type !== 'complete') {
                         let evt = new Event('complete');
                         evt.response = this.response;
-                        this.listener.dispatchEvent(evt);
+                        listener.dispatchEvent(evt);
                     }
                 });
             });
@@ -499,12 +482,11 @@
                         type = 'error';
                     }
                     this.status = type;
-                    this.listener.dispatchEvent(new Event(type));
+                    listener.dispatchEvent(new Event(type));
                 }
             };
             xhr.onerror = xhr.onabort = e => {
                 let
-                        error,
                         response = this.response = {
                             status: xhr.status,
                             text: xhr.responseText,
@@ -514,7 +496,7 @@
                 if (e.type === 'abort') response.error = new Error('Operation timeout.');
                 else response.error = new Error('Network Error.');
                 this.status = 'error';
-                this.listener.dispatchEvent(new Event('error'));
+                listener.dispatchEvent(new Event('error'));
             };
 
         }
@@ -699,7 +681,7 @@
                 url.searchParams.set('tt', +new Date()); // get a fresh version
                 let contents = cache.loadItem(moduleName);
                 if (typeof contents === s && contents.length > 0) {
-                    executeGMCode(contents);
+                    cache.exec(contents);
                     context.completeLoad(moduleName);
                     hit = true;
                 }
@@ -713,7 +695,7 @@
                             if (typeof script === s && script.length > 0) {
                                 script = transform(script, url);
                                 if (cache.enabled) cache.saveItem(moduleName, script);
-                                executeGMCode(script);
+                                cache.exec(script);
                                 context.completeLoad(moduleName);
                                 return;
                             }
