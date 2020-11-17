@@ -1,8 +1,5 @@
 <?php
 
-use NGSOFT\Tools\Objects\stdObject;
-use function NGSOFT\Tools\array_flatten;
-
 require_once __DIR__ . '/build.php';
 
 define('regexComments', '/\/\*(?:.*?\v*)+\*\//m');
@@ -46,6 +43,14 @@ function parseFile($filename) {
 }
 
 if ($css = parseFile($inputFile)) {
+    $css = trim($css);
+    $name = pathinfo($inputFile, PATHINFO_FILENAME);
+    $output = sprintf($outputFile, $name);
 
+    if (!is_dir(dirname($output))) mkdir(dirname($output), 0777, true);
+    file_put_contents($output, $css);
+    print "Build complete.\n";
+
+    print_r($css);
 }
 
