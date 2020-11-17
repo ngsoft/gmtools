@@ -1,0 +1,10 @@
+.*
+!.gitignore
+!composer.json
+*.lock
+/deps/
+/build/
+/nbproject/*/
+*.dev.*
+*.dev
+
