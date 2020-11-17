@@ -4,7 +4,7 @@
 !composer.json
 *.lock
 /deps/
-/build/
+/build/dist/
 /tests/
 /nbproject/*/
 *.dev.*
