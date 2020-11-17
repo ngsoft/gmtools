@@ -331,7 +331,7 @@
                             resolve(e);
                         }, {once: true, capture: false});
 
-                        if (elem.hidden === true) elem.hidden = false;
+                        if (elem.hidden === true) elem.hidden = null;
                         else if (elem.classList.contains('hidden')) {
                             elem.classList.remove('hidden');
                         }
@@ -535,7 +535,6 @@
 
                             modal.style['z-index'] = zindex++;
                             animate(modal, 'fadeIn').then(e => {
-                                console.debug(e);
                                 addEventListener('resize', resize);
                                 ResizeSensor(this.body, e => {
                                     setSize(this);
@@ -551,7 +550,6 @@
                         let arg;
                         if (e.type === 'dismiss') arg = false;
                         animate(modal, 'fadeOut').then(e => {
-                            console.debug(e);
                             this.close(arg);
                         });
                     })
