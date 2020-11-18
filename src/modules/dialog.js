@@ -28,7 +28,7 @@
             polyfill = require('dialogpolyfill'),
             utils = require('utils');
 
-    const {int, n, f, s, u, b, html2element, doc, Events, gettype, ResizeSensor, sprintf, addstyle, assert, loadcss} = utils;
+    const {int, n, f, s, u, b, html2element, doc, Events, gettype, ResizeSensor, sprintf, addstyle, assert, loadcss, NodeFinder} = utils;
 
     let undef, scrollBarStyles = false, zindex = 300000, isReady = false, listener = new Events();
 
@@ -348,6 +348,60 @@
 
 
 
+    function formPolyfill(root){
+        
+        
+        if (root instanceof Element) {
+
+            return NodeFinder(root).find('.gm-btn', btn => {
+
+
+                if (btn.disabled === undef) {
+
+                    Object.defineProperty(btn, 'disabled', {
+                        configurable: true, enumerable: false,
+                        get(){
+                            return this.hasAttribute('disabled');
+                        },
+                        set(flag){
+                            this.setAttribute('disabled', '');
+                            if (flag === null ? true : flag === false) this.removeAttribute('disabled');
+                        }
+                    });
+
+                }
+                if (btn.name === undef) {
+                    Object.defineProperty(btn, 'name', {
+                        configurable: true, enumerable: false,
+                        get(){
+                            return this.getAttribute('data-name') || "";
+                        },
+                        set(name){
+                            this.setAttribute('data-name', name);
+                            if (name === null) this.removeAttribute('data-name');
+                        }
+                    });
+
+                }
+
+
+            }).find('input[type="checkbox"]', input => {
+
+                Object.defineProperty(input, 'value', {
+                    configurable: true, enumerable: false,
+                    get(){
+                        return this.checked === true ? "on" : "off";
+                    },
+                    set(value){
+                        this.checked = value === "on";
+                    }
+                });
+            });
+            
+        }
+
+    }
+
 
 
 
@@ -391,10 +445,14 @@
             return this.dialog.matches('[modal]');
         }
 
+        get isReady(){
+            return isReady === true;
+        }
+
         get ready(){
             return new Promise(resolve => {
 
-                if (isReady) resolve(this);
+                if (this.isReady) resolve(this);
                 else listener.one('css.ready', () => {
                         resolve(this);
                     });
@@ -446,10 +504,9 @@
                         }
                     }
                 },
-
-                isReady: {
-                    enumerable: true, configurable: true, writable: true,
-                    value: false
+                observer: {
+                    enumerable: false, configurable: true, writable: true,
+                    value: null
                 }
             });
 
@@ -522,6 +579,7 @@
             this.root.appendChild(this.dialog);
             Events(dialog, this)
                     .on('close cancel', e => {
+                        this.observer.stop();
                         dialog.removeAttribute('modal');
                         removeEventListener('resize', resize);
                         if (doc.querySelector('dialog.gm-dialog[open]') === null) {
@@ -530,9 +588,8 @@
                     })
                     .on('show', e => {
                         if (this.open) {
-
+                            this.observer.observers.forEach(obs => obs.start());
                             doc.body.classList.add('no-scroll');
-
                             modal.style['z-index'] = zindex++;
                             animate(modal, 'fadeIn').then(e => {
                                 addEventListener('resize', resize);
@@ -598,6 +655,8 @@
                 this.body.classList.add('gm-scrollbar');
 
             }
+
+            this.observer = formPolyfill(this.root);
 
 
 
