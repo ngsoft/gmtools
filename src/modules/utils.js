@@ -319,7 +319,7 @@
                     src: src
                 });
                 if (defer === true) script.defer = true;
-                document.head.appendChild(script);
+                doc.head.appendChild(script);
 
             });
 
@@ -362,7 +362,7 @@
                     onerror: resolver,
                     href: src
                 });
-                document.head.appendChild(style);
+                doc.head.appendChild(style);
 
             });
 

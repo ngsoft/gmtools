@@ -537,22 +537,7 @@
             });
         }
 
-        get loaded(){
-            return new Promise(resolve => {
-                
-                if(this.sources.some(source=> source.type === "dash")){
-                    prequire('dashjs')
-                            .then(exp => {
-                                dashjs = exp.dashjs;
-                                resolve(this);
-                            })
-                            .catch(() => {
-                                console.warn('Cannot Load dashjs.');
-                            });
-                } else resolve(this);
 
-            });
-        }
 
 
         constructor(){
@@ -908,16 +893,7 @@
                     this.plyr = new Plyr(this.video, this.options);
                 } else this.trigger('ready');
 
-                /* this.loaded.then(()=>{
-                    if (this.root.parentElement !== root) {
-                        root.innerHTML = "";
-                        root.appendChild(this.root);
-                    }
-                    if (this.plyr === null) {
-                        this.plyr = new Plyr(this.video, this.options);
-                    } this.trigger('ready');
 
-                });*/
 
 
             }
@@ -1252,8 +1228,9 @@
     }
 
 
-    loadcss(sprintf(cfg.path, cfg.version) + '.css');
-    loadcss(config.get('paths.styles') + 'player.css');
+    // loadcss(sprintf(cfg.path, cfg.version) + '.css');
+    // loadcss(config.get('paths.styles') + 'player.css');
+
     return {PlyrPlayer, PlyrPlayerType, PlyrPlayerSource, PlyrPlayerCaption};
 }));
 

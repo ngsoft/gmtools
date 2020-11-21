@@ -47,7 +47,8 @@
                 key: 'require.min.js'
             }, sourceUrlRegExp = /\/\/@\s+sourceURL=/,
             sourceMappingUrlRegExp = /(\/\/#\s+sourceMappingURL=[^\n\r]*)/g,
-            defineRegExp = /(^|[^\.])define\s*\(/;
+            defineRegExp = /(^|[^\.])define\s*\(/,
+            doc = global.document;
 
 
     //add sourceURL and sourceMappingURL
@@ -93,6 +94,138 @@
         return path.split('.').reduce((obj, key) => obj && obj[key], object);
     }
 
+    // Deep extend destination object with N more objects
+    function extend(target = {}, ...sources) {
+        if (!sources.length) {
+            return target;
+        }
+
+        const source = sources.shift();
+
+        if (!isPlainObject(source)) {
+            return target;
+        }
+
+        Object.keys(source).forEach(key => {
+
+            if (isPlainObject(source[key])) {
+                if (!Object.keys(target).includes(key)) {
+                    Object.assign(target, {
+                        [key]: {}
+                    });
+                }
+
+                extend(target[key], source[key]);
+            } else {
+                Object.assign(target, {
+                    [key]: source[key]
+                });
+            }
+        });
+
+        return extend(target, ...sources);
+    }
+
+
+    /**
+     * Loads an external script (or multiple)
+     * @param {string|URL} ...urls
+     * @param {boolean} [defer]
+     * @returns {Promise}
+     */
+    function loadjs(...urls){
+
+        let
+                defer = false,
+                args = Array.from(arguments).filter(x => {
+            if (typeof x === b) {
+                defer = x;
+                return false;
+            }
+            return true;
+        });
+
+
+        return new Promise((resolve, reject) => {
+
+            let
+                    count = 0,
+                    resolver = function(e){
+                        if (e.type === "error") {
+                            loadRejectMessage(e, reject);
+                            return;
+                        }
+                        count++;
+                        if (count === args.length) resolve(e.target);
+                    };
+            args.forEach(src => {
+                if (src instanceof URL) src = src.href;
+                if (typeof src !== s) {
+                    reject(new Error('Invalid argument src'));
+                    return;
+                }
+                let script = doc.createElement('script');
+                Object.assign(script, {
+                    type: 'text/javascript',
+                    onload: resolver,
+                    onerror: resolver,
+                    src: src
+                });
+                if (defer === true) script.defer = true;
+                doc.head.appendChild(script);
+
+            });
+
+        });
+    }
+
+    /**
+     * Loads an external CSS (or multiple)
+     * @param {string|URL} ...urls
+     * @returns {Promise}
+     */
+    function loadcss(url){
+
+        let args = Array.from(arguments);
+
+        return new Promise((resolve, reject) => {
+
+            let
+                    count = 0,
+                    resolver = function(e){
+                        if (e.type === "error") {
+                            loadRejectMessage(e, reject);
+                            return;
+                        }
+
+                        count++;
+                        if (count === args.length) resolve(e.target);
+                    };
+            args.forEach(src => {
+                if (src instanceof URL) src = src.href;
+                if (typeof src !== s) {
+                    reject(new Error('Invalid argument src'));
+                    return;
+                }
+                let style = doc.createElement('link');
+                Object.assign(style, {
+                    rel: "stylesheet",
+                    type: "text/css",
+                    onload: resolver,
+                    onerror: resolver,
+                    href: src
+                });
+                doc.head.appendChild(style);
+
+            });
+
+        });
+    }
+
+
+
+
+
     class Configuration {
 
         constructor(){
@@ -101,7 +234,50 @@
             });
         }
 
-        addPath(name, path, version, extraconfig){
+        /**
+         * Add a module to RequireJS
+         * @param {string} name
+         * @param {string} path
+         * @param {Object|undefined} [config]
+         * @param {string|Object} [shim]
+         * @returns {Configuration}
+         */
+        addModule(name, path, config, shim){
+            if (typeof name !== s) throw new Error('Invalid Argument name.');
+            else if (typeof path !== s || !(/^http/.test(path))) throw new Error('Invalid Argument path.');
+            if (typeof config === s) {
+                shim = config;
+                config = {};
+            }
+            config = isPlainObject(config) ? config : {};
+            shim = isPlainObject(shim) ? shim : (typeof shim === s ? {exports: shim} : null);
+
+            const reqCfg = {
+                config: {
+                    [name]: config
+                },
+                paths: {
+                    [name]: path
+                }
+            };
+            if (isPlainObject(shim)) extend(reqCfg, {
+                    shim: {
+                        [name]: shim
+                    }
+                });
+
+            require.config(reqCfg);
+            return this;
+        }
+
+
+
+
+
+
+
+
+        /* addPath(name, path, version, extraconfig){
             if (typeof name !== s) throw new Error('Invalid Argument name.');
             else if (typeof path !== s || !(/^http/.test(path))) throw new Error('Invalid Argument path.');
             let obj = {name, path, config: {}};
@@ -147,7 +323,7 @@
                 loaded: false
             });
             return this;
-        }
+        }*/
 
         get(key){
             if (typeof key === u) return Object.assign({}, this.config);
@@ -159,10 +335,13 @@
 
         set(key, value){
             if (isPlainObject(key)) {
-                Object.assign(this.config, key);
+                extend(this.config, key);
             } else if (typeof key === s) {
-                this.config[key] = value;
+                if (isPlainObject(this.config[key]) && isPlainObject(value)) {
+                    extend(this.config[key], value);
+                } else this.config[key] = value;
             }
+            return this;
         }
 
         has(key){
@@ -644,25 +823,30 @@
     requirejs.config({
         baseUrl: root,
         waitSeconds: 30,
-
-        shim: {
+        /*  shim: {
             dashjs: {
                 exports: 'dashjs'
             }
-        }
+        }*/
 
     });
 
 
     // adding some deps
+
     config
-            .addPath('Plyr', 'https://cdn.jsdelivr.net/npm/plyr@%s/dist/plyr', '3.6.2')
-            .addPath('Subtitle', 'https://cdn.jsdelivr.net/npm/subtitle@%s/dist/subtitle.bundle.min', '2.0.5')
-            .addPath('Hls', 'https://cdn.jsdelivr.net/npm/hls.js@%s/dist/hls.min', '0.14.16', {
-                enableWebVTT: false, enableCEA708Captions: false
+            .addModule('Plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.6.2/dist/plyr', {
+                init(config){
+                    loadcss(config.path + '.css');
+                }
             })
-            .addPath('dashjs', 'https://cdn.dashjs.org/v%s/dash.all.min', '3.1.3')
-            .addSource('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min.js');
+            .addModule('Subtitle', 'https://cdn.jsdelivr.net/npm/subtitle@2.0.5/dist/subtitle.bundle.min')
+            .addModule('Hls', 'https://cdn.jsdelivr.net/npm/hls.js@0.14.16/dist/hls.min', {
+                enableWebVTT: false,
+                enableCEA708Captions: false
+            });
+
+
 
 
     //exporting this script contents
@@ -674,13 +858,35 @@
         return Request;
     });
     define('cache', cache);
+    
+    
+    const load = requirejs.load;
+
+    // adds config.init() callback globally
+    Object.keys(requirejs.s.contexts).forEach(c => {
+        let
+                context = requirejs.s.contexts[c],
+                orig = context.completeLoad;
+        context.completeLoad = function(moduleName){
+
+            if (context.config.config.hasOwnProperty(moduleName) && typeof context.config.config[moduleName].init === f) {
+                context.config.config[moduleName].init( {
+                    config: context.config.config[moduleName],
+                    path: context.config.paths[moduleName] ? context.config.paths[moduleName] : (context.config.baseUrl + moduleName),
+                    shim: context.config.shim[moduleName]
+                });
+            }
+            return orig(moduleName);
+        };
+        console.debug('context', c, context);
+    });
+
+    config.addModule('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min', 'dashjs');
+
 
     // overriding RequireJS default loader to enable cache and XHR
     if (cache.supported) {
-
-
-        const load = requirejs.load;
-
+        
         //Code fast load using localStorage Cache set @usecache in userscript header
         requirejs.load = function(context, moduleName, url){
 
@@ -701,8 +907,8 @@
                         .fetch()
                         .then(response => {
                             let script = response.text;
-                            // console.debug(moduleName, url, context.config.shim[moduleName]);
                             if (typeof script === s && script.length > 0) {
+                                //shim export integrated into the script
                                 if (isPlainObject(context.config.shim) && context.config.shim.hasOwnProperty(moduleName) && !defineRegExp.test(script)) {
                                     let shimConfig = context.config.shim[moduleName];
                                     if (shimConfig && shimConfig.exports) {
