@@ -805,7 +805,7 @@ const gmtools = {};
                                 if (isReady === false) {
                                     l.addEventListener('ready', () => {
                                         resolve(cfg.module);
-                                    });
+                                    }, {once: true});
                                 } else resolve(cfg.module);
 
                             });
@@ -839,7 +839,27 @@ const gmtools = {};
             })
             .addModule('iziToast', 'https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min', {
                 init(cfg){
-                    loadcss(cfg.path.substr(0, cfg.path.lastIndexOf('/js/')) + '/css/iziToast.min.css');
+
+                    let l = doc.createElement('div'), isReady = false;
+                    Object.defineProperty(cfg.module, 'ready', {
+                        configurable: true, enumerable: false,
+                        get(){
+                            return new Promise(resolve => {
+                                if (isReady === false) {
+                                    l.addEventListener('ready', () => {
+                                        resolve(cfg.module);
+                                    }, {once: true});
+                                } else resolve(cfg.module);
+
+                            });
+                        }, set(){}
+                    });
+
+                    loadcss(cfg.path.replace('/js/', '/css/') + '.css')
+                            .then(() => {
+                                isReady = true;
+                                l.dispatchEvent(new Event('ready'));
+                            });
                 }
             });
 
@@ -861,9 +881,6 @@ const gmtools = {};
         Request,
         cache
     });
-    
-    
-
 
     // adds config.init() callback globally
     Object.keys(requirejs.s.contexts).forEach(c => {
