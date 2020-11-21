@@ -38,7 +38,7 @@
 /* defaults styles */
 .pure,
 .pure * {
-    font-family: FreeSans, Arimo, "Droid Sans", "Noto Sans", Arial, Helvetica, sans-serif;
+    font-family: "Noto Sans", FreeSans, Arimo, "Droid Sans", Arial, Helvetica, sans-serif;
     font-size: 1em;
 }
 

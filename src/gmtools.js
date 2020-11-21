@@ -642,7 +642,13 @@
 
     requirejs.config({
         baseUrl: root,
-        waitSeconds: 30
+        waitSeconds: 30,
+        shim: {
+            dashjs: {
+                exports: 'dashjs'
+            }
+        }
+
     });
 
 
@@ -653,6 +659,7 @@
             .addPath('Hls', 'https://cdn.jsdelivr.net/npm/hls.js@%s/dist/hls.min', '0.14.16', {
                 enableWebVTT: false, enableCEA708Captions: false
             })
+            .addPath('dashjs', 'https://cdn.dashjs.org/v%s/dash.all.min', '3.1.3')
             .addSource('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min.js');
 
 
@@ -670,7 +677,9 @@
     if (cache.supported) {
 
 
-        const load = requirejs.load;
+        const
+                load = requirejs.load,
+                defineRegExp = /(^|[^\.])define\s*\(/;
 
         //Code fast load using localStorage Cache set @usecache in userscript header
         requirejs.load = function(context, moduleName, url){
@@ -692,7 +701,18 @@
                         .fetch()
                         .then(response => {
                             let script = response.text;
+                            // console.debug(moduleName, url, context.config.shim[moduleName]);
                             if (typeof script === s && script.length > 0) {
+                                if (isPlainObject(context.config.shim) && context.config.shim.hasOwnProperty(moduleName)) {
+                                    let shimConfig = context.config.shim[moduleName];
+                                    if (shimConfig && shimConfig.exports) {
+                                        script += "\ndefine('" + moduleName + "', function() { return " + shimConfig.exports + "; });\n";
+                                        if (shimConfig.exports.indexOf('.') == -1) {
+                                            script += '\nwindow.' + shimConfig.exports + ' = ' + shimConfig.exports + ';\n';
+                                        }
+                                    }
+                                }
+
                                 script = transform(script, url);
                                 if (cache.enabled) cache.saveItem(moduleName, script);
                                 cache.exec(script);
