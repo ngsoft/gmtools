@@ -9,8 +9,7 @@
                 'require',
 
                 'utils', 'config', 'storage', 'cache', 'isocode', 'Request',
-                        'Plyr', 'Subtitle', 'Hls'
-                        //, 'dashjs'
+                'Plyr', 'Subtitle', 'Hls', 'dashjs'
             ];
     if (typeof define === 'function' && define.amd) {
         define(dependencies, factory);
@@ -39,7 +38,8 @@
             isocode = require('isocode'),
             Subtitle = require('Subtitle'),
             Plyr = require('Plyr'),
-            Hls = require('Hls');
+            Hls = require('Hls'),
+            dashjs = require('dashjs');
 
 
 
@@ -52,7 +52,7 @@
     const {xStore, exStore} = storage;
     const cfg = config.get('Plyr');
 
-    let undef, dashjs;
+    let undef;
     //, Plyr, Subtitle, Hls;
 
 
@@ -900,7 +900,15 @@
                         });
                     }
                 });
-                this.loaded.then(()=>{
+                if (this.root.parentElement !== root) {
+                    root.innerHTML = "";
+                    root.appendChild(this.root);
+                }
+                if (this.plyr === null) {
+                    this.plyr = new Plyr(this.video, this.options);
+                } else this.trigger('ready');
+
+                /* this.loaded.then(()=>{
                     if (this.root.parentElement !== root) {
                         root.innerHTML = "";
                         root.appendChild(this.root);
@@ -909,7 +917,7 @@
                         this.plyr = new Plyr(this.video, this.options);
                     } this.trigger('ready');
 
-                });
+                });*/
 
 
             }

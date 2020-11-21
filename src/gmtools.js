@@ -46,7 +46,8 @@
                 src: 'https://cdn.jsdelivr.net/gh/requirejs/requirejs@latest/require.min.js',
                 key: 'require.min.js'
             }, sourceUrlRegExp = /\/\/@\s+sourceURL=/,
-            sourceMappingUrlRegExp = /(\/\/#\s+sourceMappingURL=[^\n\r]*)/g;
+            sourceMappingUrlRegExp = /(\/\/#\s+sourceMappingURL=[^\n\r]*)/g,
+            defineRegExp = /(^|[^\.])define\s*\(/;
 
 
     //add sourceURL and sourceMappingURL
@@ -643,6 +644,7 @@
     requirejs.config({
         baseUrl: root,
         waitSeconds: 30,
+
         shim: {
             dashjs: {
                 exports: 'dashjs'
@@ -677,9 +679,7 @@
     if (cache.supported) {
 
 
-        const
-                load = requirejs.load,
-                defineRegExp = /(^|[^\.])define\s*\(/;
+        const load = requirejs.load;
 
         //Code fast load using localStorage Cache set @usecache in userscript header
         requirejs.load = function(context, moduleName, url){
@@ -703,7 +703,7 @@
                             let script = response.text;
                             // console.debug(moduleName, url, context.config.shim[moduleName]);
                             if (typeof script === s && script.length > 0) {
-                                if (isPlainObject(context.config.shim) && context.config.shim.hasOwnProperty(moduleName)) {
+                                if (isPlainObject(context.config.shim) && context.config.shim.hasOwnProperty(moduleName) && !defineRegExp.test(script)) {
                                     let shimConfig = context.config.shim[moduleName];
                                     if (shimConfig && shimConfig.exports) {
                                         script += "\ndefine('" + moduleName + "', function() { return " + shimConfig.exports + "; });\n";
