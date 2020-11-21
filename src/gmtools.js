@@ -272,61 +272,6 @@
             return this;
         }
 
-
-
-
-
-
-
-
-        /* addPath(name, path, version, extraconfig){
-            if (typeof name !== s) throw new Error('Invalid Argument name.');
-            else if (typeof path !== s || !(/^http/.test(path))) throw new Error('Invalid Argument path.');
-            let obj = {name, path, config: {}};
-            let
-                    fullpath,
-                    config = {
-                        paths: {},
-                        config: {
-                            [name]: {}
-                        }
-                    };
-            if (typeof version === s) {
-                obj.version = version;
-                fullpath = path.replace('%s', version);
-            } else fullpath = path;
-            obj.fullpath = fullpath;
-            if (isPlainObject(extraconfig)) {
-                obj.config = extraconfig;
-                config.config[name] = extraconfig;
-            }
-            this.config[name] = obj;
-            config.paths[name] = fullpath;
-
-            requirejs.config(config);
-            return this;
-        }
-
-        addSource(varname, url){
-
-            url = typeof url === s ? [url] : url;
-            varname = typeof varname === s ? [varname] : varname;
-            if (!Array.isArray(url) || !Array.isArray(varname) || !url.every(x => /^http/.test(x))) {
-                console.warn('Cannot add Source, Invalid Arguments');
-                return this;
-            }
-            if (!Array.isArray(this.config.sources)) {
-                this.config.sources = [];
-            }
-            const sources = this.config.sources;
-            sources.push({
-                vars: varname,
-                urls: url,
-                loaded: false
-            });
-            return this;
-        }*/
-
         get(key){
             if (typeof key === u) return Object.assign({}, this.config);
             else if (typeof key === s) {
@@ -829,7 +774,6 @@
 
 
     // adding some deps
-
     config
             .addModule('Plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.6.2/dist/plyr', {
                 init(cfg){
@@ -844,7 +788,17 @@
                 }
 
             })
-            .addModule('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min', 'dashjs');
+            .addModule('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min', 'dashjs')
+            .addModule('alertify', 'https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min', {
+                init(cfg){
+
+                    if (isPlainObject(cfg.config.options)) extend(cfg.module.defaults, cfg.config.options);
+
+                    let path = cfg.path.substr(0, cfg.path.lastIndexOf('/') + 1);
+                    loadcss(path + 'css/alertify.min.css', path + 'css/themes/default.min.css');
+                    console.debug(cfg);
+                }
+            });
 
 
     //exporting this script contents
@@ -866,12 +820,13 @@
                 context = requirejs.s.contexts[c],
                 orig = context.completeLoad;
         context.completeLoad = function(moduleName){
-            let retval =orig(moduleName);
+            let retval = orig(moduleName);
             if (context.config.config.hasOwnProperty(moduleName) && typeof context.config.config[moduleName].init === f) {
                 context.config.config[moduleName].init( {
                     config: context.config.config[moduleName],
                     path: context.config.paths[moduleName] ? context.config.paths[moduleName] : (context.config.baseUrl + moduleName),
-                    shim: context.config.shim[moduleName]
+                    shim: context.config.shim[moduleName],
+                    module: context.defined[moduleName]
                 });
             }
             return retval;
