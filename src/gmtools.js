@@ -822,13 +822,7 @@
 
     requirejs.config({
         baseUrl: root,
-        waitSeconds: 30,
-        /*  shim: {
-            dashjs: {
-                exports: 'dashjs'
-            }
-        }*/
-
+        waitSeconds: 30
     });
 
 
@@ -836,17 +830,16 @@
 
     config
             .addModule('Plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.6.2/dist/plyr', {
-                init(config){
-                    loadcss(config.path + '.css');
+                init(cfg){
+                    loadcss(cfg.path + '.css');
                 }
             })
             .addModule('Subtitle', 'https://cdn.jsdelivr.net/npm/subtitle@2.0.5/dist/subtitle.bundle.min')
             .addModule('Hls', 'https://cdn.jsdelivr.net/npm/hls.js@0.14.16/dist/hls.min', {
                 enableWebVTT: false,
                 enableCEA708Captions: false
-            });
-
-
+            })
+            .addModule('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min', 'dashjs');
 
 
     //exporting this script contents
@@ -868,7 +861,7 @@
                 context = requirejs.s.contexts[c],
                 orig = context.completeLoad;
         context.completeLoad = function(moduleName){
-
+            let retval =orig(moduleName);
             if (context.config.config.hasOwnProperty(moduleName) && typeof context.config.config[moduleName].init === f) {
                 context.config.config[moduleName].init( {
                     config: context.config.config[moduleName],
@@ -876,12 +869,11 @@
                     shim: context.config.shim[moduleName]
                 });
             }
-            return orig(moduleName);
+            return retval;
         };
-        console.debug('context', c, context);
     });
 
-    config.addModule('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min', 'dashjs');
+
 
 
     // overriding RequireJS default loader to enable cache and XHR

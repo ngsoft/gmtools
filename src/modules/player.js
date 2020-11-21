@@ -1229,7 +1229,7 @@
 
 
     // loadcss(sprintf(cfg.path, cfg.version) + '.css');
-    // loadcss(config.get('paths.styles') + 'player.css');
+    loadcss(config.get('paths.styles') + 'player.css');
 
     return {PlyrPlayer, PlyrPlayerType, PlyrPlayerSource, PlyrPlayerCaption};
 }));
