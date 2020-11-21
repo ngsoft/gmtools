@@ -1,7 +1,9 @@
 /**
  * Buttons
  */
-.gm-btn {
+.gm-btn,
+a.gm-btn,
+button.gm-btn{
     display: inline-block;
     line-height: normal;
     white-space: nowrap;
@@ -43,7 +45,8 @@
 }
 
 .gm-btn,
-a.gm-btn {
+a.gm-btn,
+button.gm-btn {
     font-family: inherit;
     font-size: 100%;
     padding: .5em 1em;

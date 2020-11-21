@@ -1,39 +1,7 @@
 /**
  * Main Styles (to load first)
  */
-
-@keyframes pureFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes pureFadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-.pure .fadeIn {
-    animation-name: pureFadeIn;
-    animation-duration: .75s;
-    animation-fill-mode: both;
-}
-
-.pure .fadeOut {
-    animation-name: pureFadeOut;
-    animation-duration: .75s;
-    animation-fill-mode: both;
-}
-
+@import url(animate.css);
 
 /* defaults styles */
 .pure,

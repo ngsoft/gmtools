@@ -801,13 +801,30 @@ const gmtools = {};
                                     if (node !== null && !nodes.includes(node) && doc.contains(node)) {
                                         nodes.push(node);
                                         node.setAttribute('class', 'pure ' + node.getAttribute('class'));
-
+                                        node.querySelectorAll('.ajs-commands button:not(.gm-btn)').forEach(btn => btn.classList.add('gm-btn'));
+                                        node.querySelectorAll('.ajs-footer .ajs-primary .gm-btn.blue').forEach(btn => btn.parentElement.appendChild(btn));
+                                        
                                     }
+
+
+
                                 });
                             });
-                    loadcss(path + '/css/alertify.min.css', path + '/css/themes/default.min.css');
+                    loadcss(
+                            path + '/css/alertify.min.css',
+                            path + '/css/themes/default.min.css',
+                            config.get('paths.styles') + 'alertify.css'
+                            );
                     observer.observe(doc, {childList: true, subtree: true})
 
+                },
+                options: {
+                    theme: {
+                        ok: 'gm-btn blue light',
+                        cancel: 'gm-btn red light',
+                        input: ''
+
+                    }
                 }
             })
             .addModule('iziToast', 'https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min', {
