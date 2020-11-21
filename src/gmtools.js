@@ -20,6 +20,8 @@
     };
 }((typeof unsafeWindow !== 'undefined' ? unsafeWindow : window), (typeof unsafeWindow !== 'undefined' ? unsafeWindow : window).document));
 
+// exports gmtools to the userscript
+const gmtools = {};
 
 (function(global){
 
@@ -505,7 +507,7 @@
         }
 
         /**
-         *
+         * Creates a new Request
          * @param {string} url
          * @param {Object} [headers] Headers to send
          * @param {number} [timeout] Timeout in seconds
@@ -810,6 +812,14 @@
         return Request;
     });
     define('cache', cache);
+
+    Object.assign(gmtools, {
+        requirejs,
+        GM: gmexports,
+        config,
+        Request,
+        cache
+    });
     
     
     const load = requirejs.load;
@@ -890,6 +900,7 @@
             }
         };
     }
+
 
 
 }(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window));
