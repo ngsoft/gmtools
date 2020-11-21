@@ -775,7 +775,7 @@ const gmtools = {};
 
     // adding some deps
     config
-            .addModule('Plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.6.2/dist/plyr', {
+            .addModule('Plyr', 'https://cdn.jsdelivr.net/npm/plyr@3.6.2/dist/plyr.min', {
                 init(cfg){
                     loadcss(cfg.path + '.css');
                 }
@@ -791,12 +791,28 @@ const gmtools = {};
             .addModule('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min', 'dashjs')
             .addModule('alertify', 'https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min', {
                 init(cfg){
-
                     if (isPlainObject(cfg.config.options)) extend(cfg.module.defaults, cfg.config.options);
+                    let
+                            path = cfg.path.substr(0, cfg.path.lastIndexOf('/')),
+                            nodes = [],
+                            observer = new MutationObserver(mutations => {
+                                mutations.forEach(mutation=>{
+                                    let node = mutation.target.closest('.alertify:not(.pure)');
+                                    if (node !== null && !nodes.includes(node) && doc.contains(node)) {
+                                        nodes.push(node);
+                                        node.setAttribute('class', 'pure ' + node.getAttribute('class'));
 
-                    let path = cfg.path.substr(0, cfg.path.lastIndexOf('/') + 1);
-                    loadcss(path + 'css/alertify.min.css', path + 'css/themes/default.min.css');
-                    console.debug(cfg);
+                                    }
+                                });
+                            });
+                    loadcss(path + '/css/alertify.min.css', path + '/css/themes/default.min.css');
+                    observer.observe(doc, {childList: true, subtree: true})
+
+                }
+            })
+            .addModule('iziToast', 'https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min', {
+                init(cfg){
+                    loadcss(cfg.path.substr(0, cfg.path.lastIndexOf('/js/')) + '/css/iziToast.min.css');
                 }
             });
 
