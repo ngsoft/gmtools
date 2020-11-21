@@ -791,39 +791,49 @@ const gmtools = {};
             .addModule('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min', 'dashjs')
             .addModule('alertify', 'https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min', {
                 init(cfg){
-                    if (isPlainObject(cfg.config.options)) extend(cfg.module.defaults, cfg.config.options);
                     let
                             path = cfg.path.substr(0, cfg.path.lastIndexOf('/')),
                             nodes = [],
-                            observer = new MutationObserver(mutations => {
-                                mutations.forEach(mutation=>{
-                                    let node = mutation.target.closest('.alertify:not(.pure)');
-                                    if (node !== null && !nodes.includes(node) && doc.contains(node)) {
-                                        nodes.push(node);
-                                        node.setAttribute('class', 'pure ' + node.getAttribute('class'));
-                                        node.querySelectorAll('.ajs-commands button:not(.gm-btn)').forEach(btn => btn.classList.add('gm-btn'));
-                                        node.querySelectorAll('.ajs-footer .ajs-primary .gm-btn.blue').forEach(btn => btn.parentElement.appendChild(btn));
-                                        
-                                    }
+                            l = doc.createElement('div'), isReady = false;
 
+                    if (isPlainObject(cfg.config.options)) extend(cfg.module.defaults, cfg.config.options);
 
+                    Object.defineProperty(cfg.module, 'ready', {
+                        configurable: true, enumerable: false,
+                        get(){
+                            return new Promise(resolve => {
+                                if (isReady === false) {
+                                    l.addEventListener('ready', () => {
+                                        resolve(cfg.module);
+                                    });
+                                } else resolve(cfg.module);
 
-                                });
                             });
-                    loadcss(
-                            path + '/css/alertify.min.css',
-                            path + '/css/themes/default.min.css',
-                            config.get('paths.styles') + 'alertify.css'
-                            );
-                    observer.observe(doc, {childList: true, subtree: true})
+                        }, set(){}
 
+                    });
+                            
+                    loadcss(path + '/css/alertify.min.css', path + '/css/themes/default.min.css', config.get('paths.styles') + 'alertify.css')
+                            .then(() => {
+                                isReady = true;
+                                l.dispatchEvent(new Event('ready'));
+                            });
                 },
                 options: {
                     theme: {
-                        ok: 'gm-btn blue light',
-                        cancel: 'gm-btn red light',
+                        ok: 'ajs-ok gm-btn blue light',
+                        cancel: 'ajs-cancel gm-btn red light',
                         input: ''
-
+                    },
+                    hooks: {
+                        postinit(i){
+                            let root = i.elements.root;
+                            if(root.matches('.alertify:not(.pure)')){
+                                root.setAttribute('class', 'pure ' + root.getAttribute('class'));
+                                //set the confirm button last
+                                root.querySelectorAll('.ajs-footer .ajs-primary .ajs-ok').forEach(btn => btn.parentElement.appendChild(btn));
+                            }
+                        }
                     }
                 }
             })

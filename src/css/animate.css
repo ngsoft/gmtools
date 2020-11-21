@@ -18,12 +18,14 @@
     }
 }
 
+.animated.fadeIn,
 .pure .fadeIn {
     animation-name: pureFadeIn;
     animation-duration: .75s;
     animation-fill-mode: both;
 }
 
+.animated.fadeOut,
 .pure .fadeOut {
     animation-name: pureFadeOut;
     animation-duration: .75s;

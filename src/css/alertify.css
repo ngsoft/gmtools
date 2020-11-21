@@ -5,7 +5,6 @@
     border-radius: .25em;
     background: var(--white);
     color: var(--dark);
-
     -webkit-box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.2),
         1px 3px 15px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.2),
@@ -17,25 +16,38 @@
 .pure .ajs-footer {
     border-radius: 0;
     background-color: rgba(0, 0, 0, .03);
-
 }
 
 .pure .ajs-header {
     border-bottom: 1px solid rgba(0, 0, 0, .125);
     border-radius: .25em .25em 0 0;
+    padding: 1em 1.5em;
+    min-height: 1.15em;
+
 }
 
 .pure .ajs-footer {
     border-top: 1px solid rgba(0, 0, 0, .125);
     border-radius: 0 0 .25em .25em;
+    padding: .25em;
+    min-height: 2.6875em;
 }
 
 
 .pure .ajs-body {
-    color: black;
+    color: var(--dark);
 }
 
-.pure .ajs-footer .ajs-buttons .ajs-button,
-.pure .ajs-commands button {
+.pure .ajs-footer .ajs-buttons .ajs-button {
     outline: 0;
+    text-transform: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--gray-light);
+    padding: .5em 1em;
+}
+
+.pure.alertify .ajs-dimmer {
+    opacity: 1;
+    background-color: rgba(37, 37, 37, .75);
 }

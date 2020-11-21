@@ -3,7 +3,7 @@
  */
 .gm-btn,
 a.gm-btn,
-button.gm-btn{
+button.gm-btn {
     display: inline-block;
     line-height: normal;
     white-space: nowrap;
@@ -55,7 +55,9 @@ button.gm-btn {
     border-radius: 2px;
     background-color: var(--gray-lighter);
     color: var(--dark);
-    border: 1px solid var(--gray-light);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--gray-light);
 
 }
 
