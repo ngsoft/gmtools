@@ -736,8 +736,6 @@ const gmtools = {};
     /**
      * requirejs Loader
      */
-
-
     let hit = false;
 
     if (cache.enabled) {
@@ -822,7 +820,7 @@ const gmtools = {};
     });
     
     
-    const load = requirejs.load;
+
 
     // adds config.init() callback globally
     Object.keys(requirejs.s.contexts).forEach(c => {
@@ -844,10 +842,10 @@ const gmtools = {};
     });
 
 
-
-
     // overriding RequireJS default loader to enable cache and XHR
     if (cache.supported) {
+
+        const load = requirejs.load;
         
         //Code fast load using localStorage Cache set @usecache in userscript header
         requirejs.load = function(context, moduleName, url){
