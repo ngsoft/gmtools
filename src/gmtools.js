@@ -260,12 +260,14 @@
                     [name]: path
                 }
             };
-            if (isPlainObject(shim)) extend(reqCfg, {
+            if (isPlainObject(shim)) {
+                extend(reqCfg, {
                     shim: {
                         [name]: shim
                     }
                 });
-
+            }
+            this.set(name, config);
             require.config(reqCfg);
             return this;
         }
@@ -836,8 +838,11 @@
             })
             .addModule('Subtitle', 'https://cdn.jsdelivr.net/npm/subtitle@2.0.5/dist/subtitle.bundle.min')
             .addModule('Hls', 'https://cdn.jsdelivr.net/npm/hls.js@0.14.16/dist/hls.min', {
-                enableWebVTT: false,
-                enableCEA708Captions: false
+                options:{
+                    enableWebVTT: false,
+                    enableCEA708Captions: false
+                }
+
             })
             .addModule('dashjs', 'https://cdn.dashjs.org/v3.1.3/dash.all.min', 'dashjs');
 

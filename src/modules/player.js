@@ -41,8 +41,6 @@
             Hls = require('Hls'),
             dashjs = require('dashjs');
 
-
-
     const {
         doc, loadcss, sprintf, gettype,
         s, f, u, n, b, assert, Events,
@@ -757,11 +755,7 @@
             this.addType(
                     'hls',
                     source => {
-
-                        let options = {
-                            enableWebVTT: false,
-                            enableCEA708Captions: false
-                        };
+                        let options = config.get('Hls.options') || {};
 
                         let hls = source.hls = new Hls(options);
 
