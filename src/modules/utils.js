@@ -23,15 +23,19 @@
     const
 
             // Scallar types
-            s = string ="string",
-            b = bool ="boolean",
-            f = "function",
-            o = object ="object",
-            u = "undefined",
-            n = number = "number",
+            string = "string",
+            bool = "boolean",
+            object = "object",
+            number = "number",
             int = 'int',
-            float='float',
-            array='array',
+            float = 'float',
+            array = 'array',
+            s = string,
+            b = bool,
+            f = "function",
+            o = object,
+            u = "undefined",
+            n = number,
             
             //time
             second = 1000,

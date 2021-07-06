@@ -255,7 +255,7 @@
         /* globals GM_getValue, GM_setValue, GM_deleteValue, GM_listValues */
         constructor(){
             super();
-            const errors = ["GM_getValue", "GM_setValue", "GM_deleteValue", "GM_listValues"].filter(x => typeof utils[x] !== f);
+            const errors = ["GM_getValue", "GM_setValue", "GM_deleteValue", "GM_listValues"].filter(x => typeof GM[x] !== f);
             if (errors.length > 0) throw new Error('gmStore:  %s are not available.'.replace('%s', errors.join(', ')));
         }
         get(key){
